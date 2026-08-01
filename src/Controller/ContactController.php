@@ -35,6 +35,13 @@ final class ContactController extends AbstractController
             return $this->redirectToRoute('app_contact_new');
         }
 
-        return $this->render('contact/new.html.twig', compact('form'));
+        $contacts = $entityManager
+            ->getRepository(Contact::class)
+            ->findAll();
+
+        return $this->render(
+            'contact/new.html.twig',
+            compact('form', 'contacts'),
+        );
     }
 }
