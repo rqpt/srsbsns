@@ -26,7 +26,10 @@ class Contact
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
-    #[Assert\Regex('/^\+?[0-9\s\-()]{7,20}$/')]
+    #[Assert\Regex(
+        pattern: '/^\+?[0-9\s\-()]{7,20}$/',
+        message: 'This value is not a valid phone number.',
+    )]
     #[Assert\Length(max: 255)]
     private ?string $phone_number = null;
 
