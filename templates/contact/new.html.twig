@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactController!{% endblock %}
+
+{% block body %}
+
+<main>
+    <h1>Contacts</h1>
+
+    <p>Expand the "New Contact" section to add contacts.</p>
+
+    <hr>
+
+    <section>
+        <details
+            name="new-contact"
+            {{ form.vars.submitted and not form.vars.valid ? 'open' }}
+        >
+            <summary>
+                <h2>New Contact</h2>
+            </summary>
+
+            {{ form(form) }}
+        </details>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </section>
+
+    <section>
+        <details name="contacts" open>
+            <summary>
+                <h2>Existing Contacts</h2>
+            </summary>
+
+            {% if contacts is empty %}
+                <p>No contacts found.</p>
+            {% else %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>Phone Number</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contact in contacts %}
+                            <tr>
+                                <td>{{ contact.name }}</td>
+                                <td>{{ contact.surname }}</td>
+                                <td>{{ contact.phoneNumber }}</td>
+                                <td>{{ contact.email }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </details>
+    </section>
+</main>
+{% endblock %}
