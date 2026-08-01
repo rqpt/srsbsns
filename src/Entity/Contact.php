@@ -27,7 +27,7 @@ class Contact
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Regex(
-        pattern: '/^\+?[0-9\s\-()]{7,20}$/',
+        pattern: '/^(\+27|27|0)[0-9]{9}$/',
         message: 'This value is not a valid phone number.',
     )]
     #[Assert\Length(max: 255)]
