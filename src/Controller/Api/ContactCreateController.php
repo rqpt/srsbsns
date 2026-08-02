@@ -20,7 +20,7 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
     methods: ['POST'],
     format: 'json',
 )]
-final class CreateContactController extends AbstractController
+final class ContactCreateController extends AbstractController
 {
     public function __invoke(
         Request $request,

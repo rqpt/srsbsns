@@ -5,7 +5,7 @@ namespace App\Tests\Controller;
 use App\Entity\Contact;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class ContactControllerTest extends WebTestCase
+class ContactIndexControllerTest extends WebTestCase
 {
     public function testContactFormCreatesContactAndRedirects(): void
     {
