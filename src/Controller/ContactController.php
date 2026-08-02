@@ -33,21 +33,15 @@ final class ContactController extends AbstractController
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
-        $formIsSubmitted = $form->isSubmitted();
-
-        $recaptchaScore = null;
-
-        if ($formIsSubmitted) {
-            $recaptchaScore = $recaptcha3Validator
-                ->getLastResponse()
-                ?->getScore();
-        }
-
-        if ($formIsSubmitted && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($contact);
             $entityManager->flush();
 
             $eventDispatcher->dispatch(new ContactCreatedEvent($contact));
+
+            $recaptchaScore = $recaptcha3Validator
+                ->getLastResponse()
+                ?->getScore();
 
             $this->addFlash('success', sprintf(
                 <<<'FLASH'
