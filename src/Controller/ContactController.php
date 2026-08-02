@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Event\ContactCreatedEvent;
 use App\Form\ContactType;
 use Doctrine\ORM\EntityManagerInterface;
 use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator;
@@ -11,6 +12,7 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 #[Route(
     path: '/',
@@ -22,6 +24,7 @@ final class ContactController extends AbstractController
     public function __invoke(
         Request $request,
         EntityManagerInterface $entityManager,
+        EventDispatcherInterface $eventDispatcher,
         Recaptcha3Validator $recaptcha3Validator,
         #[Autowire('%karser_recaptcha3.score_threshold%')] float $recaptchaThreshold,
     ): Response {
@@ -44,6 +47,7 @@ final class ContactController extends AbstractController
             $entityManager->persist($contact);
             $entityManager->flush();
 
+            $eventDispatcher->dispatch(new ContactCreatedEvent($contact));
 
             $this->addFlash('success', sprintf(
                 <<<'FLASH'
