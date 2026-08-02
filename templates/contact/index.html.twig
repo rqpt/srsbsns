@@ -25,7 +25,7 @@
 
         {% for message in app.flashes('success') %}
             <div class="alert alert-success">
-                {{ message }}
+                {{ message|raw }}
             </div>
         {% endfor %}
     </section>
