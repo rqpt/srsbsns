@@ -8,7 +8,7 @@ use App\Service\NotificationService;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-final class ContactCreatedSubscriber implements EventSubscriberInterface
+final class ContactSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private readonly NotificationService $notificationService,
