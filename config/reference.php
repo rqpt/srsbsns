@@ -1474,6 +1474,13 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     generate_final_classes?: bool|Param, // Default: true
  *     generate_final_entities?: bool|Param, // Default: false
  * }
+ * @psalm-type KarserRecaptcha3Config = array{
+ *     site_key?: scalar|Param|null,
+ *     secret_key?: scalar|Param|null,
+ *     score_threshold?: float|Param, // Default: 0.5
+ *     host?: scalar|Param|null, // Default host is "www.google.com", if it is not reachable then use "www.recaptcha.net" instead. // Default: "www.google.com"
+ *     enabled?: bool|Param, // Default: true
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -1487,6 +1494,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     twig_extra?: TwigExtraConfig,
  *     security?: SecurityConfig,
  *     monolog?: MonologConfig,
+ *     karser_recaptcha3?: KarserRecaptcha3Config,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -1503,6 +1511,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         security?: SecurityConfig,
  *         monolog?: MonologConfig,
  *         maker?: MakerConfig,
+ *         karser_recaptcha3?: KarserRecaptcha3Config,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -1517,6 +1526,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         twig_extra?: TwigExtraConfig,
  *         security?: SecurityConfig,
  *         monolog?: MonologConfig,
+ *         karser_recaptcha3?: KarserRecaptcha3Config,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -1532,6 +1542,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         twig_extra?: TwigExtraConfig,
  *         security?: SecurityConfig,
  *         monolog?: MonologConfig,
+ *         karser_recaptcha3?: KarserRecaptcha3Config,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,
