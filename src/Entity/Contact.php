@@ -4,9 +4,18 @@ namespace App\Entity;
 
 use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
+#[UniqueEntity(
+    fields: 'phone_number',
+    message: 'This phone number is already in use.',
+)]
+#[UniqueEntity(
+    fields: 'email',
+    message: 'This email is already in use.',
+)]
 class Contact
 {
     #[ORM\Id]
@@ -24,7 +33,7 @@ class Contact
     #[Assert\Length(max: 255)]
     private ?string $surname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     #[Assert\NotBlank]
     #[Assert\Regex(
         pattern: '/^(\+27|27|0)[0-9]{9}$/',
@@ -33,7 +42,7 @@ class Contact
     #[Assert\Length(max: 255)]
     private ?string $phone_number = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     #[Assert\NotBlank]
     #[Assert\Email]
     #[Assert\Length(max: 255)]
