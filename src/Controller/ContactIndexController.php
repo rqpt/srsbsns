@@ -19,7 +19,7 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
     name: 'app_contact_index',
     methods: ['GET', 'POST'],
 )]
-final class ContactController extends AbstractController
+final class ContactIndexController extends AbstractController
 {
     public function __invoke(
         Request $request,
