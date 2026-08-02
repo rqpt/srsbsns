@@ -23,7 +23,7 @@ final class ContactController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         MailerInterface $mailer,
-        string $adminEmail,
+        #[Autowire('%app.admin_email%')] string $adminEmail,
     ): Response {
         $contact = new Contact;
 
@@ -57,13 +57,13 @@ final class ContactController extends AbstractController
         string $adminEmail,
     ): void {
         $emailToContact = (new TemplatedEmail)
-            ->to($contact->getEmail())
+            ->to(Address::create($contact->getEmail()))
             ->subject('Contact saved')
             ->htmlTemplate('emails/contact_confirmation.html.twig')
             ->context(['contact' => $contact]);
 
         $emailToAdmin = (new TemplatedEmail)
-            ->to($adminEmail)
+            ->to(Address::create($adminEmail))
             ->subject('New Contact Submission')
             ->htmlTemplate('emails/contact_admin_notification.html.twig')
             ->context(['contact' => $contact]);
