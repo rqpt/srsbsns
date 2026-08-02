@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(
     path: '/',
-    name: 'app_contact_new',
+    name: 'app_contact_index',
     methods: ['GET', 'POST'],
 )]
 final class ContactController extends AbstractController
@@ -32,7 +32,7 @@ final class ContactController extends AbstractController
 
             $this->addFlash('success', 'Contact created successfully!');
 
-            return $this->redirectToRoute('app_contact_new');
+            return $this->redirectToRoute('app_contact_index');
         }
 
         $contacts = $entityManager
@@ -40,7 +40,7 @@ final class ContactController extends AbstractController
             ->findAll();
 
         return $this->render(
-            'contact/new.html.twig',
+            'contact/index.html.twig',
             compact('form', 'contacts'),
         );
     }
