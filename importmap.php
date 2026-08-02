@@ -29,4 +29,6 @@ return [
     '@hotwired/turbo' => ['version' => '8.0.23'],
     '@picocss/pico' => ['version' => '2.1.1'],
     '@picocss/pico/css/pico.classless.min.css' => ['version' => '2.1.1', 'type' => 'css'],
+    'htmx.org' => ['version' => '2.0.10'],
+    'alpinejs' => ['version' => '3.15.12'],
 ];

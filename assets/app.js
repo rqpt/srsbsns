@@ -7,6 +7,8 @@
 
 // JS
 import './stimulus_bootstrap.js';
+import './js/htmx.js';
+import './js/alpine.js';
 
 // Styles
 import './styles/app.css';
