@@ -2,6 +2,12 @@
 
 ## Setup
 
+### Dependencies
+
+- PHP8.4
+- Symfony
+- Composer
+
 ### Get the project running
 
 ```
