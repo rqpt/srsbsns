@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Repository\ContactRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +24,7 @@ final class ContactDeleteController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         CsrfTokenManagerInterface $csrfTokenManager,
+        ContactRepository $contactRepository,
     ): Response {
         $token = $request->headers->get('X-CSRF-TOKEN');
 
@@ -32,6 +34,12 @@ final class ContactDeleteController extends AbstractController
 
         $entityManager->remove($contact);
         $entityManager->flush();
+
+        if ($contactRepository->count([]) === 0) {
+            return $this->render('contact/_empty_list.html.twig', [
+                'hx_target' => '#contacts-container',
+            ]);
+        }
 
         return new Response(null, Response::HTTP_OK);
     }
