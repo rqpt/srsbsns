@@ -38,7 +38,10 @@
         url: '',
         target: '',
         confirmDelete() {
-            htmx.ajax('DELETE', this.url, { target: this.target, swap: 'outerHTML' });
+            htmx.ajax('DELETE', this.url, {
+                target: this.target,
+                headers: { 'X-CSRF-TOKEN': '{{ csrf_token('delete_contact') }}' }
+            });
             this.open = false;
         }
     }">
