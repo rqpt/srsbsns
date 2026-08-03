@@ -93,8 +93,7 @@
 
         <dialog
             x-effect="open ? $el.showModal() : $el.close()"
-            @close="open = false"
-            @keydown.escape.window="open = false"
+            @cancel.prevent="open = false"
         >
             <article>
                 <header>
