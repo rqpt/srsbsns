@@ -51,44 +51,46 @@
                 <h2>Existing Contacts</h2>
             </summary>
 
-            {% if contacts is empty %}
-                <p>No contacts found.</p>
-            {% else %}
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Surname</th>
-                            <th>Phone Number</th>
-                            <th>Email</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for contact in contacts %}
-                            <tr id="contact-row-{{ contact.id }}">
-                                <td>{{ contact.name }}</td>
-                                <td>{{ contact.surname }}</td>
-                                <td>{{ contact.phoneNumber }}</td>
-                                <td>{{ contact.email }}</td>
-                                <td>
-                                    <button
-                                        type="button"
-                                        @click="
-                                            name = '{{ contact.name|e('js') }}';
-                                            url = '{{ path('app_contact_delete', {id: contact.id}) }}';
-                                            target = '#contact-row-{{ contact.id }}';
-                                            open = true;
-                                        "
-                                    >
-                                        Delete
-                                    </button>
-                                </td>
+            <div id="contacts-container">
+                {% if contacts is empty %}
+                    <p>No contacts found.</p>
+                {% else %}
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Surname</th>
+                                <th>Phone Number</th>
+                                <th>Email</th>
+                                <th></th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            {% endif %}
+                        </thead>
+                        <tbody id="contacts-tbody">
+                            {% for contact in contacts %}
+                                <tr id="contact-row-{{ contact.id }}">
+                                    <td>{{ contact.name }}</td>
+                                    <td>{{ contact.surname }}</td>
+                                    <td>{{ contact.phoneNumber }}</td>
+                                    <td>{{ contact.email }}</td>
+                                    <td>
+                                        <button
+                                            type="button"
+                                            @click="
+                                                name = '{{ contact.name|e('js') }}';
+                                                url = '{{ path('app_contact_delete', {id: contact.id}) }}';
+                                                target = '#contact-row-{{ contact.id }}';
+                                                open = true;
+                                            "
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
         </details>
 
         <dialog
@@ -105,7 +107,9 @@
                 <footer>
                     <menu>
                         <button type="button" @click="open = false">Cancel</button>
-                        <button type="button" @click="confirmDelete()">Confirm Delete</button>
+                        <button type="button" @click="confirmDelete()">
+                            Confirm Delete
+                        </button>
                     </menu>
                 </footer>
             </article>
