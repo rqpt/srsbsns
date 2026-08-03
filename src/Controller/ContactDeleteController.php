@@ -26,16 +26,21 @@ final class ContactDeleteController extends AbstractController
         CsrfTokenManagerInterface $csrfTokenManager,
         ContactRepository $contactRepository,
     ): Response {
-        $token = $request->headers->get('X-CSRF-TOKEN');
+        $csrfToken = $request->headers
+            ->get('X-CSRF-TOKEN');
 
-        if (!$csrfTokenManager->isTokenValid(new CsrfToken('delete_contact', $token))) {
+        $csrfTokenIsValid = $csrfTokenManager->isTokenValid(
+            new CsrfToken('delete_contact', $csrfToken),
+        );
+
+        if (!$csrfTokenIsValid) {
             return new Response('Invalid CSRF token', Response::HTTP_FORBIDDEN);
         }
 
         $entityManager->remove($contact);
         $entityManager->flush();
 
-        if ($contactRepository->count([]) === 0) {
+        if ($contactRepository->count() === 0) {
             return $this->render('contact/_empty_list.html.twig', [
                 'hx_target' => '#contacts-container',
             ]);
