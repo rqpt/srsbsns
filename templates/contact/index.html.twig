@@ -40,6 +40,7 @@
         confirmDelete() {
             htmx.ajax('DELETE', this.url, {
                 target: this.target,
+                swap: 'outerHTML swap:500ms',
                 headers: { 'X-CSRF-TOKEN': '{{ csrf_token('delete_contact') }}' }
             });
             this.open = false;

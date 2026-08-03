@@ -19,3 +19,8 @@ details[open]::details-content {
   block-size: auto;
   opacity: 1;
 }
+
+tr.htmx-swapping {
+    opacity: 0;
+    transition: opacity 500ms ease-out;
+}
