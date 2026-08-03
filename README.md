@@ -1,4 +1,8 @@
+# SRSBSNS
+
 ## Setup
+
+### Get the project running
 
 ```
 git clone https://github.com/rqpt/srsbsns
@@ -9,6 +13,35 @@ composer install
 php bin/console doctrine:schema:create
 
 symfony server:start --open
+```
+
+
+### Testing API endpoints
+
+**Use the API_KEY in .env, or set your own.**
+
+#### Create Contact
+
+```sh
+curl -i -X POST http://127.0.0.1:8000/api/contacts \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -H 'Authorization: Bearer "$API_KEY"' \
+  -d '{
+    "name": "PE",
+    "surname": "Vermeulen",
+    "phone_number": "0674417057",
+    "email": "ernstvermeulen@proton.me"
+  }'
+```
+
+#### Delete Contact
+
+```sh
+ curl -i -X DELETE http://127.0.0.1:8000/api/contacts/33 \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -H 'Authorization: Bearer "$API_KEY"'
 ```
 
 ## What I tested, and why.
