@@ -4,19 +4,19 @@
 
 ### Dependencies
 
-- PHP8.4
-- Symfony
+- PHP 8.4
+- Symfony CLI
 - Composer
 
 ### Get the project running
 
 ```
-git clone https://github.com/rqpt/srsbsns
+git clone [https://github.com/rqpt/srsbsns](https://github.com/rqpt/srsbsns)
 cd srsbsns
 composer install
 
 # We're using sqlite, so doctrine:database:create isn't needed.
-php bin/console doctrine:schema:create
+php bin/console doctrine:migrations:migrate
 
 symfony server:start --open
 ```
@@ -32,7 +32,7 @@ symfony server:start --open
 curl -i -X POST http://127.0.0.1:8000/api/contacts \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
-  -H 'Authorization: Bearer "$API_KEY"' \
+  -H 'Authorization: Bearer $API_KEY' \
   -d '{
     "name": "PE",
     "surname": "Vermeulen",
@@ -47,7 +47,7 @@ curl -i -X POST http://127.0.0.1:8000/api/contacts \
  curl -i -X DELETE http://127.0.0.1:8000/api/contacts/33 \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
-  -H 'Authorization: Bearer "$API_KEY"'
+  -H 'Authorization: Bearer $API_KEY'
 ```
 
 ## What I tested, and why.
@@ -66,7 +66,7 @@ I could have attempted to containerise the application, added contact update
 endpoints, paginated the contact index.
 
 I don't think everything being on one page looks too bad, but maybe splitting
-the contact create form into it's own page would have been nicer.
+the contact create form into its own page would have been nicer.
 
 A couple of changes I made were straight on to master, and I'm trying to get
 into the habit of making PRs for every branch I finish, and to review them
